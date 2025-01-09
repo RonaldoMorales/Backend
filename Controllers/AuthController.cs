@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Catedra3.src.Dto.Auth;
 using Catedra3.src.Models;
+using Catedra3.src.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -18,11 +19,13 @@ namespace Catedra3.Controllers
     {
 
         private readonly UserManager<AppUser> _userManager;
+        private readonly TokenService _tokenService;
 
 
-        public AuthController(UserManager<AppUser> userManager)
+        public AuthController(UserManager<AppUser> userManager, TokenService tokenService)
         {
             _userManager = userManager; 
+            _tokenService = tokenService;
         }
 
         [HttpPost("register")]
@@ -37,6 +40,12 @@ namespace Catedra3.Controllers
                 if(!ModelState.IsValid)
                 {
                     return BadRequest(ModelState);
+                }
+
+                 var existingUser = await _userManager.FindByEmailAsync(registerDto.Email);
+                if (existingUser != null)
+                {
+                    return BadRequest(new { Message = "El correo electrónico ya está registrado." });
                 }
 
                 var AppUser = new AppUser
@@ -75,6 +84,37 @@ namespace Catedra3.Controllers
                 return StatusCode(500, ex.Message);
             }
 
+        }
+
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
+        {
+            try
+            {
+                var user = await _userManager.FindByEmailAsync(loginDto.Email);
+
+                if (user == null || !await _userManager.CheckPasswordAsync(user, loginDto.Password))
+                {
+                    return Unauthorized(new { Message = "Credenciales inválidas." });
+                }
+
+                var token = _tokenService.CreateToken(user);
+
+                var newUser = new NewUserDto
+                {
+                    Username = user.UserName,
+                    Email = user.Email,
+                    Token = token
+                };
+
+                return Ok(newUser);
+            }
+
+            catch(DbException ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
         }
         
     }

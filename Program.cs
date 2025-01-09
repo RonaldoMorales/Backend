@@ -1,6 +1,7 @@
 using System.Text;
 using Catedra3.src.Data;
 using Catedra3.src.Models;
+using Catedra3.src.Services;
 using DotNetEnv;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -57,6 +58,8 @@ builder.Services.AddAuthentication(opt =>
     };
 
 });
+
+builder.Services.AddScoped<TokenService>();
 
 
 var app = builder.Build();
