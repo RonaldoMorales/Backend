@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Catedra3.props" />
+</Project>
