@@ -52,7 +52,7 @@ builder.Services.AddAuthentication(opt =>
         ValidateAudience = true,
         ValidAudience = builder.Configuration["JWT:Audience"],
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"] ?? throw new ArgumentNullException("JWT:SigninKey"))),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Signingkey"] ?? throw new ArgumentNullException("JWT:SigninKey"))),
 
     };
 
@@ -68,10 +68,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
+
 app.UseHttpsRedirection();
+app.UseRouting(); 
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapControllers(); 
 
 app.Run();
 

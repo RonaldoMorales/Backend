@@ -137,3 +137,4 @@ C:\Users\ronal\OneDrive\Escritorio\BackendCatedra\Catedra3\obj\Debug\net8.0\refi
 C:\Users\ronal\OneDrive\Escritorio\BackendCatedra\Catedra3\obj\Debug\net8.0\Catedra3.pdb
 C:\Users\ronal\OneDrive\Escritorio\BackendCatedra\Catedra3\obj\Debug\net8.0\Catedra3.genruntimeconfig.cache
 C:\Users\ronal\OneDrive\Escritorio\BackendCatedra\Catedra3\obj\Debug\net8.0\ref\Catedra3.dll
+C:\Users\ronal\OneDrive\Escritorio\BackendCatedra\Catedra3\obj\Debug\net8.0\Catedra3.sourcelink.json
