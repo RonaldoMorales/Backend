@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Threading.Tasks;
 using Catedra3.src.Models;
 using Microsoft.AspNetCore.Identity;
@@ -19,6 +20,9 @@ namespace Catedra3.src.Data
 
         }
 
+        public DbSet<Post> Posts { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -29,7 +33,15 @@ namespace Catedra3.src.Data
             };
 
             modelBuilder.Entity<IdentityRole>().HasData(roles);
+
+            modelBuilder.Entity<Post>()
+                .HasOne(p => p.User)
+                .WithMany(u => u.Posts)
+                .HasForeignKey(p => p.UserId);
         }
-        
+
+       
+            
+            
     }
 }

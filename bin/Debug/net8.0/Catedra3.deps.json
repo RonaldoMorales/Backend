@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v8.0": {
       "Catedra3/1.0.0": {
         "dependencies": {
+          "CloudinaryDotNet": "1.27.1",
           "DotNetEnv": "3.1.1",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.0",
@@ -20,6 +21,19 @@
         },
         "runtime": {
           "Catedra3.dll": {}
+        }
+      },
+      "CloudinaryDotNet/1.27.1": {
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "System.Net.Http": "4.3.4",
+          "System.Text.RegularExpressions": "4.3.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/CloudinaryDotNet.dll": {
+            "assemblyVersion": "1.27.1.0",
+            "fileVersion": "1.27.1.0"
+          }
         }
       },
       "DotNetEnv/3.1.1": {
@@ -616,6 +630,14 @@
           "System.Threading.Timer": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0",
           "System.Xml.XDocument": "4.3.0"
+        }
+      },
+      "Newtonsoft.Json/13.0.3": {
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.3.27908"
+          }
         }
       },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {},
@@ -1537,6 +1559,13 @@
       "serviceable": false,
       "sha512": ""
     },
+    "CloudinaryDotNet/1.27.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-siUWEx20S4UtvzNlF5jI6hC+4IR0TxqmeaxtzOlOSqR7d+qYr0Q8GL4ritseuj5t5Qv9nuO/QxV2vy5P1M/mPg==",
+      "path": "cloudinarydotnet/1.27.1",
+      "hashPath": "cloudinarydotnet.1.27.1.nupkg.sha512"
+    },
     "DotNetEnv/3.1.1": {
       "type": "package",
       "serviceable": true,
@@ -1872,6 +1901,13 @@
       "sha512": "sha512-WcSp3+vP+yHNgS8EV5J7pZ9IRpeDuARBPN28by8zqff1wJQXm26PVU8L3/fYLBJVU7BtDyqNVWq2KlCVvSSR4A==",
       "path": "netstandard.library/1.6.1",
       "hashPath": "netstandard.library.1.6.1.nupkg.sha512"
+    },
+    "Newtonsoft.Json/13.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
+      "path": "newtonsoft.json/13.0.3",
+      "hashPath": "newtonsoft.json.13.0.3.nupkg.sha512"
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.2": {
       "type": "package",

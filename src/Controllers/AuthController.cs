@@ -18,14 +18,19 @@ namespace Catedra3.Controllers
     public class AuthController : ControllerBase
     {
 
+
+
         private readonly UserManager<AppUser> _userManager;
         private readonly TokenService _tokenService;
+        
+        private readonly SignInManager<AppUser> _signInManager;
 
 
-        public AuthController(UserManager<AppUser> userManager, TokenService tokenService)
+        public AuthController(UserManager<AppUser> userManager, TokenService tokenService, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager; 
             _tokenService = tokenService;
+            _signInManager = signInManager;
         }
 
         [HttpPost("register")]

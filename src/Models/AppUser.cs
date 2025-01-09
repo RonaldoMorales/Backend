@@ -7,6 +7,8 @@ namespace Catedra3.src.Models
 {
     public class AppUser : IdentityUser
     {
+
+         public ICollection<Post> Posts { get; set; } = new List<Post>();
         
     }
 }
