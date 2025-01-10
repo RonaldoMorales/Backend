@@ -11,9 +11,12 @@
 
 git clone https://github.com/RonaldoMorales/Backend.git
 
-# Luego de clonar el repositorio, debe restaurar el proyecto: 
+# Luego de clonar el repositorio, debe acceder a la carpeta del proyecto:
 
 cd Backend
+
+# Ahora debe de restaurar las dependencias con el siguiente comando:
+
 dotnet restore
 
 Configuracion ENV: 
