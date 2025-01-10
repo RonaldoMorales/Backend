@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Catedra3.Controllers
 {
 
-    [Route("api/[controller]")]
+    [Route("catedra3/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {

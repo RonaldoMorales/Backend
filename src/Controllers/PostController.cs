@@ -16,7 +16,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Catedra3.src.Controllers
 {
 
-    [Route("api/[controller]")]
+    [Route("catedra3/[controller]")]
     [ApiController]
     public class PostController : ControllerBase
     {
@@ -45,29 +45,29 @@ namespace Catedra3.src.Controllers
 
             if(!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                 return BadRequest(new { error = "Los datos proporcionados no son válidos." });
             }
 
             var exists = _context.Posts.Any(p => p.Titulo == createPostDto.Titulo);
 
             if(exists)
             {
-                return BadRequest("El post ya existe");
+                return BadRequest(new { error = "El post ya existe." });
             }
 
             string uploadedImageUrl = string.Empty;
 
             if(imageFile != null)
             {
-                var allowedFormats = new[] {"image/jpg", "image/png"};
+                var allowedFormats = new[] {"image/jpeg", "image/png"};
                 if(!allowedFormats.Contains(imageFile.ContentType))
                 {
-                    return BadRequest("solo se admiten archivos jpg y png");
+                    return BadRequest(new { error = "Solo se admiten archivos de formato jpeg y png." });
                 }
 
                 if(imageFile.Length > 5* 1024 * 1024)
                 {
-                    return BadRequest("El archivo no puede ser superior a 5MB");
+                    return BadRequest(new { error = "El archivo no puede ser superior a un tamaño de 5MB." });
                 }
 
                 try
@@ -103,7 +103,7 @@ namespace Catedra3.src.Controllers
 
             else
             {
-                return BadRequest("La imagen es requerida");
+                return BadRequest(new { error = "La imagen es requerida." });
             }
 
              var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
@@ -123,7 +123,8 @@ namespace Catedra3.src.Controllers
             _context.Posts.Add(newPost);
             await _context.SaveChangesAsync();
 
-            return Ok("Post subido exitosamente");
+           // En el backend, cambiar a:
+        return Ok(new { message = "Post subido exitosamente" });
 
         }
 
