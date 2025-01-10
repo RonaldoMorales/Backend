@@ -19,7 +19,7 @@ cd Backend
 
 dotnet restore
 
-Configuracion ENV: 
+# Configuracion ENV: 
 
 No se debe modificar nada del .Env, este ya se encuentra bien en el proyecto
 
