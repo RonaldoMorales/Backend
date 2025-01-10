@@ -44,13 +44,13 @@ namespace Catedra3.Controllers
 
                 if(!ModelState.IsValid)
                 {
-                    return BadRequest(ModelState);
+                    return BadRequest(new { Message = "Datos inválidos", Errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage) });
                 }
 
                  var existingUser = await _userManager.FindByEmailAsync(registerDto.Email);
                 if (existingUser != null)
                 {
-                    return BadRequest(new { Message = "El correo electrónico ya está registrado." });
+                   return BadRequest(new { Message = "El correo electrónico ya está registrado." });
                 }
 
                 var AppUser = new AppUser
@@ -67,11 +67,11 @@ namespace Catedra3.Controllers
                     var roleResult = await _userManager.AddToRoleAsync(AppUser, "User");
                     if(roleResult.Succeeded)
                     {
-                        return Ok("Usuario creado, no hubo problemas");
+                        return Ok(new { message = "Usuario registrado, no hubo problemas" });
                     }
                     else
                     {
-                        return StatusCode(500, "Error al asignar rol");
+                         return StatusCode(500, new { Message = "Error al asignar rol" });
                     }
                     
                    
@@ -79,14 +79,14 @@ namespace Catedra3.Controllers
 
                 else
                 {
-                    return StatusCode(500, "Error al crear usuario");
+                    return StatusCode(500, new { Message = "Error al crear usuario", Errors = createUser.Errors.Select(e => e.Description) });
                 }
 
             }
 
             catch(DbException ex)
             {
-                return StatusCode(500, ex.Message);
+                return StatusCode(500, new { Message = "Error de base de datos", Exception = ex.Message });
             }
 
         }
