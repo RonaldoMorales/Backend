@@ -1,3 +1,4 @@
+using System.Net;
 using System.Text;
 using Catedra3.src.Data;
 using Catedra3.src.Models;
@@ -61,12 +62,26 @@ builder.Services.AddAuthentication(opt =>
 
         ValidateIssuer = true,
         ValidIssuer = builder.Configuration["JWT:Issuer"],
+        ValidateLifetime = true,
         ValidateAudience = true,
         ValidAudience = builder.Configuration["JWT:Audience"],
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Signingkey"] ?? throw new ArgumentNullException("JWT:SigninKey"))),
 
     };
+    opt.Events = new JwtBearerEvents{
+        OnAuthenticationFailed = context => 
+        {
+            if (context.Exception is SecurityTokenExpiredException)
+            {
+                context.Response.Headers.Append("Token-Expired", "true"); 
+                context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+            }
+            return Task.CompletedTask;
+        }
+    };
+
+    
 
 });
 

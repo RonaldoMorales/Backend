@@ -42,7 +42,6 @@ namespace Catedra3.src.Controllers
 
         public async Task<IActionResult> CreatePost([FromForm] CreatePostDto createPostDto, IFormFile imageFile)
         {
-
             if(!ModelState.IsValid)
             {
                  return BadRequest(new { error = "Los datos proporcionados no son válidos." });
@@ -123,7 +122,7 @@ namespace Catedra3.src.Controllers
             _context.Posts.Add(newPost);
             await _context.SaveChangesAsync();
 
-           // En el backend, cambiar a:
+           
         return Ok(new { message = "Post subido exitosamente" });
 
         }
@@ -132,6 +131,7 @@ namespace Catedra3.src.Controllers
         [Authorize]
         public async Task<IActionResult> GetMyPosts()
         {
+
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             if (string.IsNullOrEmpty(userId))
