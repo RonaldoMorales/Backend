@@ -38,7 +38,7 @@ namespace Catedra3.src.Services
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddMinutes(1),
+                Expires = DateTime.UtcNow.AddMinutes(9),
                 SigningCredentials = creds, 
                 Issuer = _config["Jwt:Issuer"],
                 Audience = _config["Jwt:Audience"]
